@@ -14,33 +14,85 @@ body {
     color: white;
 }
 
-/* overlay */
+/* LAYOUT FIX */
 .overlay {
-    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     min-height: 100vh;
+    padding: 40px;
+    background: rgba(0,0,0,0.7);
+
+    align-items: flex-start; /* 🔥 FIX PRINCIPAL */
+}
+
+/* PANELS */
+.left-panel, .ranking, .circuit {
+    width: 300px;
+}
+
+.left-panel, .circuit {
+    height: fit-content; /* 🔥 évite qu’ils s’étirent */
+}
+
+/* CONCESSION */
+.left-panel {
+    background: rgba(20,20,20,0.9);
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ffcc00;
     text-align: center;
 }
 
+.left-panel a {
+    display: block;
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid #ffcc00;
+    color: #ffcc00;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.left-panel a:hover {
+    background: #ffcc00;
+    color: black;
+}
+
+/* TITRE */
 h1 {
     color: #ffcc00;
     text-shadow: 0 0 20px #ffcc00;
 }
 
-/* cartes */
+/* CARDS */
 .card {
     background: rgba(20,20,20,0.85);
     margin: 10px auto;
     padding: 15px;
-    width: 320px;
     cursor: pointer;
     transition: 0.3s;
     border-left: 4px solid #4da6ff;
 }
 
 .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 0 0 20px #4da6ff;
+}
+
+/* CIRCUIT */
+.circuit {
+    background: rgba(20,20,20,0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #4da6ff;
+    text-align: center;
+}
+
+.track-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 /* PANEL */
@@ -52,21 +104,13 @@ h1 {
     height:100%;
     background: linear-gradient(120deg, #000, #0a0a0a);
     display: none;
-    animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
-}
-
-/* layout */
 .container {
     display: flex;
     height: 100%;
 }
 
-/* gauche */
 .left {
     width: 50%;
     display: flex;
@@ -74,7 +118,12 @@ h1 {
     align-items: center;
 }
 
-/* voiture */
+.right {
+    width: 50%;
+    padding: 50px;
+}
+
+/* VOITURE */
 .car-img {
     width: 80%;
     filter: drop-shadow(0 0 40px #4da6ff);
@@ -86,35 +135,38 @@ h1 {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* droite */
-.right {
-    width: 50%;
-    padding: 50px;
-}
-
-/* titre */
-.name {
-    font-size: 40px;
-    color: #4da6ff;
-    margin-bottom: 20px;
-}
-
-/* texte */
-.info {
+/* TITRE ANIMÉ */
+.animate-title {
     opacity: 0;
-    animation: fadeText 0.5s forwards;
+    transform: translateX(-30px);
+    animation: slideTitle 0.6s forwards;
 }
 
-.info:nth-child(2){animation-delay:0.3s;}
-.info:nth-child(3){animation-delay:0.5s;}
-.info:nth-child(4){animation-delay:0.7s;}
-.info:nth-child(5){animation-delay:0.9s;}
-
-@keyframes fadeText {
-    to {opacity:1;}
+@keyframes slideTitle {
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* barres */
+/* INFOS */
+.animate-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s forwards;
+}
+
+.animate-item:nth-child(2){animation-delay:0.2s;}
+.animate-item:nth-child(3){animation-delay:0.3s;}
+.animate-item:nth-child(4){animation-delay:0.4s;}
+.animate-item:nth-child(5){animation-delay:0.5s;}
+.animate-item:nth-child(6){animation-delay:0.6s;}
+.animate-item:nth-child(7){animation-delay:0.7s;}
+.animate-item:nth-child(8){animation-delay:0.8s;}
+.animate-item:nth-child(9){animation-delay:0.9s;}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* STATS */
 .bar {
     background: #222;
     height: 8px;
@@ -124,9 +176,11 @@ h1 {
 .fill {
     background: #4da6ff;
     height: 100%;
+    width: 0;
+    transition: width 1s ease;
 }
 
-/* fermer */
+/* CLOSE */
 .close {
     position: absolute;
     top: 20px;
@@ -140,18 +194,39 @@ h1 {
 <body>
 
 <div class="overlay">
-<h1>🏁 Night Racer 🏁</h1>
 
-<div class="card" onclick="openPanel('p1')">#1 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p2')">#2 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p3')">#3 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p4')">#4 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p5')">#5 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p6')">#6 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p7')">#7 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p8')">#8 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p9')">#9 Pilote inconnu</div>
-<div class="card" onclick="openPanel('p10')">#10 Pilote inconnu</div>
+<!-- CONCESSION -->
+<div class="left-panel">
+    <h2>🚗 Concessionnaire</h2>
+    <a href="https://www.concession-luxury-cars.fr" target="_blank">
+        ACCÉDER AU SITE
+    </a>
+</div>
+
+<!-- CLASSEMENT -->
+<div class="ranking">
+    <h1>🏁 Night Racer 🏁</h1>
+
+    <div class="card" onclick="openPanel('p1')">#1 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p2')">#2 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p3')">#3 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p4')">#4 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p5')">#5 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p6')">#6 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p7')">#7 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p8')">#8 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p9')">#9 Pilote inconnu</div>
+    <div class="card" onclick="openPanel('p10')">#10 Pilote inconnu</div>
+</div>
+
+<!-- CIRCUIT -->
+<div class="circuit">
+    <h2>🏎️ Circuit de la semaine</h2>
+    <img src="Lotus Circuit.png" class="track-img">
+    <p><b>Nom :</b> Little Seoul Run</p>
+    <p><b>Date :</b> 12 Avril</p>
+    <p><b>Heure :</b> 21h00</p>
+</div>
 
 </div>
 
@@ -160,29 +235,35 @@ h1 {
 <span class="close" onclick="closePanel()">✖</span>
 
 <div class="container">
-    
     <div class="left">
         <img id="car" class="car-img">
     </div>
-
     <div class="right" id="info"></div>
-
 </div>
 
 </div>
 
 <script>
 const pilots = {
-p1:{name:"Pilote 1",nickname:"Le Roi",car:"GTR",crew:"Midnight",rep:"★★★★★",story:"Le boss.",carImg:"car1.png",stats:{speed:95,drift:80,control:90,power:95}},
-p2:{name:"Pilote 2",nickname:"Shadow",car:"M4",crew:"Midnight",rep:"★★★★☆",story:"Invisible.",carImg:"car1.png",stats:{speed:85,drift:75,control:80,power:85}},
+p1:{name:"Pilote 1",nickname:"Le Roi",car:"GTR",crew:"Midnight",rep:"★★★★★",story:"Le boss du crew.",carImg:"car1.png",stats:{speed:95,drift:80,control:90,power:95}},
+
+p2:{name:"Pilote 2",nickname:"Shadow",car:"M4",crew:"Midnight",rep:"★★★★☆",story:"Invisible sur la route.",carImg:"car1.png",stats:{speed:85,drift:75,control:80,power:85}},
+
 p3:{name:"Pilote 3",nickname:"Nitro",car:"Supra",crew:"Midnight",rep:"★★★★☆",story:"Toujours à fond.",carImg:"car1.png",stats:{speed:90,drift:70,control:75,power:90}},
-p4:{name:"Pilote 4",nickname:"Blaze",car:"R8",crew:"Midnight",rep:"★★★★☆",story:"Explosif.",carImg:"car1.png",stats:{speed:88,drift:60,control:80,power:92}},
-p5:{name:"Pilote 5",nickname:"DriftKing",car:"RX7",crew:"Midnight",rep:"★★★★☆",story:"Maître drift.",carImg:"car1.png",stats:{speed:70,drift:95,control:85,power:70}},
-p6:{name:"Pilote 6",nickname:"Vortex",car:"Lambo",crew:"Midnight",rep:"★★★☆☆",story:"Rapide.",carImg:"car1.png",stats:{speed:92,drift:65,control:78,power:90}},
-p7:{name:"Pilote 7",nickname:"Ghost",car:"Mustang",crew:"Midnight",rep:"★★★☆☆",story:"Invisible.",carImg:"car1.png",stats:{speed:80,drift:60,control:70,power:85}},
-p8:{name:"Pilote 8",nickname:"Razor",car:"370Z",crew:"Midnight",rep:"★★★☆☆",story:"Agressif.",carImg:"car1.png",stats:{speed:78,drift:75,control:72,power:80}},
-p9:{name:"Pilote 9",nickname:"Phantom",car:"RS6",crew:"Midnight",rep:"★★★☆☆",story:"Silencieux.",carImg:"car1.png",stats:{speed:85,drift:60,control:75,power:88}},
-p10:{name:"Pilote 10",nickname:"Eclipse",car:"C63",crew:"Midnight",rep:"★★☆☆☆",story:"Challenger.",carImg:"car1.png",stats:{speed:75,drift:55,control:65,power:82}}
+
+p4:{name:"Pilote 4",nickname:"Blaze",car:"R8",crew:"Midnight",rep:"★★★★☆",story:"Départ explosif.",carImg:"car1.png",stats:{speed:88,drift:60,control:80,power:92}},
+
+p5:{name:"Pilote 5",nickname:"DriftKing",car:"RX7",crew:"Midnight",rep:"★★★★☆",story:"Maître du drift.",carImg:"car1.png",stats:{speed:70,drift:95,control:85,power:70}},
+
+p6:{name:"Pilote 6",nickname:"Vortex",car:"Lambo",crew:"Midnight",rep:"★★★☆☆",story:"Rapide et imprévisible.",carImg:"car1.png",stats:{speed:92,drift:65,control:78,power:90}},
+
+p7:{name:"Pilote 7",nickname:"Ghost",car:"Mustang",crew:"Midnight",rep:"★★★☆☆",story:"Impossible à suivre.",carImg:"car1.png",stats:{speed:80,drift:60,control:70,power:85}},
+
+p8:{name:"Pilote 8",nickname:"Razor",car:"370Z",crew:"Midnight",rep:"★★★☆☆",story:"Très agressif.",carImg:"car1.png",stats:{speed:78,drift:75,control:72,power:80}},
+
+p9:{name:"Pilote 9",nickname:"Phantom",car:"RS6",crew:"Midnight",rep:"★★★☆☆",story:"Silencieux mais dangereux.",carImg:"car1.png",stats:{speed:85,drift:60,control:75,power:88}},
+
+p10:{name:"Pilote 10",nickname:"Eclipse",car:"C63",crew:"Midnight",rep:"★★☆☆☆",story:"Le challenger du crew.",carImg:"car1.png",stats:{speed:75,drift:55,control:65,power:82}}
 };
 
 function openPanel(id){
@@ -191,22 +272,29 @@ const p = pilots[id];
 document.getElementById("car").src = p.carImg;
 
 document.getElementById("info").innerHTML = `
-<div class="name">${p.name}</div>
+<div class="name animate-title">${p.name}</div>
 
-<div class="info"><b>Surnom :</b> ${p.nickname}</div>
-<div class="info"><b>Voiture :</b> ${p.car}</div>
-<div class="info"><b>Crew :</b> ${p.crew}</div>
-<div class="info"><b>Réputation :</b> ${p.rep}</div>
+<div class="info animate-item"><b>Surnom :</b> ${p.nickname}</div>
+<div class="info animate-item"><b>Voiture :</b> ${p.car}</div>
+<div class="info animate-item"><b>Crew :</b> ${p.crew}</div>
+<div class="info animate-item"><b>Réputation :</b> ${p.rep}</div>
 
-<div class="info"><p>${p.story}</p></div>
+<div class="info animate-item"><p>${p.story}</p></div>
 
-<div class="info">Vitesse<div class="bar"><div class="fill" style="width:${p.stats.speed}%"></div></div></div>
-<div class="info">Drift<div class="bar"><div class="fill" style="width:${p.stats.drift}%"></div></div></div>
-<div class="info">Contrôle<div class="bar"><div class="fill" style="width:${p.stats.control}%"></div></div></div>
-<div class="info">Puissance<div class="bar"><div class="fill" style="width:${p.stats.power}%"></div></div></div>
+<div class="info animate-item">Vitesse<div class="bar"><div class="fill fill-speed"></div></div></div>
+<div class="info animate-item">Drift<div class="bar"><div class="fill fill-drift"></div></div></div>
+<div class="info animate-item">Contrôle<div class="bar"><div class="fill fill-control"></div></div></div>
+<div class="info animate-item">Puissance<div class="bar"><div class="fill fill-power"></div></div></div>
 `;
 
 document.getElementById("panel").style.display = "block";
+
+setTimeout(()=>{
+    document.querySelector(".fill-speed").style.width = p.stats.speed + "%";
+    document.querySelector(".fill-drift").style.width = p.stats.drift + "%";
+    document.querySelector(".fill-control").style.width = p.stats.control + "%";
+    document.querySelector(".fill-power").style.width = p.stats.power + "%";
+}, 300);
 }
 
 function closePanel(){
