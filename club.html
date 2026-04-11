@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Club</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+<style>
+
+/* FOND */
+body {
+    margin: 0;
+    font-family: 'Russo One', sans-serif;
+    background: radial-gradient(circle at top, #050a12, #000);
+    color: #ccc;
+}
+
+/* NAVBAR */
+.menu {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,170,255,0.2);
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.6);
+}
+
+/* LOGO */
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 65px;
+    filter: drop-shadow(0 0 10px #00aaff);
+}
+
+/* MENU */
+.menu-links {
+    display: flex;
+    gap: 30px;
+}
+
+.menu-links a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.menu-links a:hover {
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+/* SECTION */
+.section {
+    padding: 150px 20px 50px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #00aaff;
+}
+
+.title {
+    font-size: 40px;
+    color: white;
+    margin: 20px 0 40px;
+}
+
+/* TEXTE */
+.text {
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+/* TIMELINE */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 80px auto;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00aaff;
+}
+
+.timeline-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* EVENT */
+.event {
+    text-align: center;
+    width: 180px;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s forwards;
+}
+
+/* POINT */
+.point {
+    width: 12px;
+    height: 12px;
+    background: #00aaff;
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* DATE */
+.date {
+    margin-top: 10px;
+    color: #00aaff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+/* CONTENT */
+.content {
+    margin-top: 15px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* ANIM */
+.event:nth-child(1){animation-delay:0.2s;}
+.event:nth-child(2){animation-delay:0.4s;}
+.event:nth-child(3){animation-delay:0.6s;}
+.event:nth-child(4){animation-delay:0.8s;}
+.event:nth-child(5){animation-delay:1s;}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="menu">
+<img src="logo2.png" class="logo">
+
+<div class="menu-links">
+<a href="index.html">Accueil</a>
+<a href="classement.html">Classement</a>
+<a href="courses.html">Courses</a>
+<a href="club.html">Club</a>
+</div>
+</nav>
+
+<!-- TEXTE -->
+<div class="section">
+
+<div class="subtitle">NOTRE HISTOIRE</div>
+<div class="title">Freeway Midnight Club</div>
+
+<div class="text">
+Le Midnight Club est à l’origine un groupe de street racing japonais légendaire,
+né à la fin des années 80. Fondé en 1987, il rassemblait une élite de pilotes,
+connus pour leur maîtrise, leur sang-froid et leur vitesse hors norme.
+
+Contrairement aux simples crews de rue, le Midnight Club fonctionnait comme
+un cercle fermé. L’entrée n’y était pas donnée à n’importe qui : seuls les
+meilleurs, les plus réguliers et les plus respectés pouvaient espérer en faire partie.
+
+Rouler sous le nom du Midnight Club n’était pas seulement un privilège,
+c’était une consécration. Une reconnaissance ultime dans le monde du street racing,
+où chaque course pouvait marquer une carrière ou la briser.
+
+Avec le temps, l’influence du Midnight Club s’est propagée bien au-delà du Japon.
+Des structures inspirées de cette légende ont vu le jour, perpétuant son esprit
+et ses valeurs à travers le monde.
+
+Aujourd’hui, à Los Santos, le Freeway Midnight Club reprend cet héritage.
+Entre autoroutes, circuits urbains et courses nocturnes, le club incarne une
+nouvelle génération de pilotes prêts à écrire leur propre légende.
+
+Ici, chaque run compte. Chaque victoire construit une réputation.
+Et chaque pilote a une histoire à raconter.
+</div>
+
+</div>
+
+<!-- TIMELINE -->
+<div class="timeline">
+
+<div class="timeline-line"></div>
+
+<div class="timeline-container">
+
+<div class="event">
+<div class="point"></div>
+<div class="date">1987</div>
+<div class="content">Création du Midnight Club au Japon.</div>
+</div>
+
+<div class="event">
+<div class="point"></div>
+<div class="date">1995</div>
+<div class="content">Référence du street racing.</div>
+</div>
+
+<div class="event">
+<div class="point"></div>
+<div class="date">2005</div>
+<div class="content">Expansion internationale.</div>
+</div>
+
+<div class="event">
+<div class="point"></div>
+<div class="date">2020</div>
+<div class="content">Création FMC à Los Santos.</div>
+</div>
+
+<div class="event">
+<div class="point"></div>
+<div class="date">2024</div>
+<div class="content">Premières courses RP.</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
