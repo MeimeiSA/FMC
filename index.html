@@ -2,95 +2,170 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Freeway Midnight Club</title>
+<title>Night Racer</title>
 
+<link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Russo One', sans-serif;
-    background: url('https://i.pinimg.com/originals/95/ef/b8/95efb8425d270933e5e890b33ab5ef70.gif') no-repeat center/cover;
-    color: white;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+
+/* VIDEO */
+.video-bg {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    z-index: -2;
 }
 
-/* overlay */
+/* OVERLAY */
 .overlay {
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(6px);
-    padding: 40px;
-    border-radius: 15px;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
 }
 
-/* titre */
-h1 {
-    font-size: 40px;
-    color: #ffcc00;
-    letter-spacing: 4px;
-    animation: glow 2s infinite alternate;
+/* NAVBAR PRO */
+.menu {
+    position: fixed;
+    top: 10px; /* 🔥 AJOUT */
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 95%; /* un peu moins large */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 30px;
+
+    border-radius: 10px; /* 🔥 effet flottant */
+    border: 1px solid rgba(0,170,255,0.2);
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.6);
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px #ffcc00; }
-    to { text-shadow: 0 0 30px #ffcc00, 0 0 60px #ffcc00; }
+/* LOGO À GAUCHE */
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%); /* 🔥 centre vertical */
+    width: 65px;
 }
 
-/* bouton */
-.btn {
-    margin-top: 30px;
-    padding: 15px 40px;
-    font-size: 18px;
-    border: none;
-    background: transparent;
-    color: #4da6ff;
-    border: 2px solid #4da6ff;
-    cursor: pointer;
+/* LIENS CENTRÉS */
+.menu-links {
+    display: flex;
+    gap: 30px;
+}
+
+.menu-links a {
+    color: #aaa;
+    text-decoration: none;
     transition: 0.3s;
-    animation: pulse 2s infinite;
 }
 
-.btn:hover {
-    background: #4da6ff;
+.menu-links a:hover {
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+/* HERO BAS DROITE */
+.hero {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+
+    text-align: right;
+
+    background: rgba(0,0,0,0.4);
+    padding: 20px 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+    transform: translateY(50px);
+    animation: heroAppear 1s forwards;
+}
+
+/* TITRE */
+.hero h1 {
+    font-size: 50px;
+    color: white;
+    text-shadow: 0 0 20px #00aaff;
+}
+
+/* TEXTE */
+.hero p {
+    color: #aaa;
+    margin: 10px 0;
+}
+
+/* BOUTON */
+.enter-btn {
+    display: inline-block;
+    border: 1px solid #00aaff;
+    padding: 12px 30px;
+    color: #00aaff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.enter-btn:hover {
+    background: #00aaff;
     color: black;
-    transform: scale(1.1);
 }
 
-/* animation bouton */
-@keyframes pulse {
-    0% { box-shadow: 0 0 5px #4da6ff; }
-    50% { box-shadow: 0 0 20px #4da6ff; }
-    100% { box-shadow: 0 0 5px #4da6ff; }
+/* ANIMATION */
+@keyframes heroAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="overlay">
-    <h1>🏁 FREEWAY MIDNIGHT CLUB</h1>
-    <button class="btn" onclick="start()">ENTRER</button>
+<!-- VIDEO -->
+<video autoplay muted loop class="video-bg">
+    <source src="video.mp4" type="video/mp4">
+</video>
+
+<!-- OVERLAY -->
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+<nav class="menu">
+
+<img src="logo2.png" class="logo">
+
+<div class="menu-links">
+<a href="index.html">Accueil</a>
+<a href="classement.html">Classement</a>
+<a href="courses.html">Courses</a>
+<a href="club.html">Club</a>
 </div>
 
-<!-- musique -->
-<audio id="music" autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+</nav>
 
-<script>
-function start() {
-    document.body.style.transition = "0.5s";
-    document.body.style.opacity = "0";
+<!-- TEXTE -->
+<div class="hero">
+    <h1>🏁 FMC 🏁</h1>
+    <p>Bienvenue dans le Freeway Midnight Club</p>
 
-    setTimeout(() => {
-        window.location.href = "main.html";
-    }, 500);
-}
-</script>
+    <a href="classement.html" class="enter-btn">ENTRER</a>
+</div>
 
 </body>
 </html>
