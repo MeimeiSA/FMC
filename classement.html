@@ -45,24 +45,25 @@
     transform: scale(1.05);
 }
 
-/* PANEL */
+/* PANEL BG */
 .panel {
     position: fixed;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background: radial-gradient(circle, #000, #050a12);
+    background: radial-gradient(circle at center, #02070d, #000);
     display: none;
     z-index: 9999;
 }
 
+/* CONTAINER */
 .container {
     display: flex;
     height: 100%;
 }
 
-/* LEFT (VOITURE) */
+/* LEFT */
 .left {
     width: 60%;
     display: flex;
@@ -70,40 +71,50 @@
     align-items: center;
 }
 
-/* IMAGE VOITURE */
+/* IMAGE */
 .car-img {
-    width: 90%;
-    max-width: 700px;
-    filter: drop-shadow(0 0 40px #00aaff);
+    width: 85%;
+    max-width: 750px;
+    filter: drop-shadow(0 0 50px #00aaff);
     animation: slide 0.6s forwards;
 }
 
-/* RIGHT (INFOS) */
+/* RIGHT */
 .right {
     width: 40%;
-    padding: 50px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 20px;
 }
 
 /* TITRES */
 .name {
-    font-size: 40px;
+    font-size: 42px;
     color: white;
 }
 
 .nickname {
     color: #00aaff;
-    margin-bottom: 20px;
 }
 
-/* CARD INFO */
-.info-box {
+/* BLOCS */
+.box {
     background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,170,255,0.2);
     padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(0,170,255,0.1);
+}
+
+/* TITRE BOX */
+.box-title {
+    margin-bottom: 10px;
+    color: #00aaff;
+    font-size: 14px;
+    letter-spacing: 2px;
 }
 
 /* STATS */
@@ -113,15 +124,25 @@
 
 .bar {
     height: 6px;
-    background: #222;
-    margin-top: 5px;
+    background: #111;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .fill {
     height: 100%;
-    background: #00aaff;
+    background: linear-gradient(90deg, #00aaff, #0088ff);
     width: 0;
     transition: 1s;
+}
+
+/* CLOSE */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 /* IMAGE */
@@ -228,22 +249,25 @@ let p = pilots[id];
 document.getElementById("car").src = p.carImg;
 
 document.getElementById("info").innerHTML = `
+<div>
 <div class="name">${p.name}</div>
 <div class="nickname">"${p.nickname}"</div>
-
-<div class="info-box">
-<b>Voiture :</b><br>${p.car}
 </div>
 
-<div class="info-box">
-<b>Palmarès :</b><br>
+<div class="box">
+<div class="box-title">VÉHICULE</div>
+${p.car}
+</div>
+
+<div class="box">
+<div class="box-title">PALMARÈS</div>
 🥇 ${p.wins} Victoires<br>
-🥈 ${p.p2} Secondes places<br>
-🥉 ${p.p3} Troisièmes places
+🥈 ${p.p2} Secondes<br>
+🥉 ${p.p3} Troisièmes
 </div>
 
-<div class="info-box">
-<b>Performance</b>
+<div class="box">
+<div class="box-title">PERFORMANCE</div>
 
 <div class="stat">Vitesse
 <div class="bar"><div class="fill speed"></div></div>
@@ -262,11 +286,10 @@ document.getElementById("info").innerHTML = `
 
 document.getElementById("panel").style.display = "block";
 
-/* ANIMATION DES BARRES */
 setTimeout(()=>{
-document.querySelector(".speed").style.width = (p.wins*10+20)+"%";
-document.querySelector(".control").style.width = (p.p2*10+20)+"%";
-document.querySelector(".style").style.width = (p.p3*10+20)+"%";
+document.querySelector(".speed").style.width = (p.wins*10+30)+"%";
+document.querySelector(".control").style.width = (p.p2*10+30)+"%";
+document.querySelector(".style").style.width = (p.p3*10+30)+"%";
 },300);
 }
 
