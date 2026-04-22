@@ -45,7 +45,7 @@
     transform: scale(1.05);
 }
 
-/* PANEL BG */
+/* PANEL */
 .panel {
     position: fixed;
     top:0;
@@ -76,7 +76,6 @@
     width: 85%;
     max-width: 750px;
     filter: drop-shadow(0 0 50px #00aaff);
-    animation: slide 0.6s forwards;
 }
 
 /* RIGHT */
@@ -99,14 +98,12 @@
     color: #00aaff;
 }
 
-/* BLOCS */
+/* BOX */
 .box {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(0,170,255,0.2);
     padding: 20px;
     border-radius: 12px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(0,170,255,0.1);
 }
 
 /* TITRE BOX */
@@ -114,7 +111,6 @@
     margin-bottom: 10px;
     color: #00aaff;
     font-size: 14px;
-    letter-spacing: 2px;
 }
 
 /* STATS */
@@ -131,44 +127,14 @@
 
 .fill {
     height: 100%;
-    background: linear-gradient(90deg, #00aaff, #0088ff);
     width: 0;
     transition: 1s;
 }
 
-/* CLOSE */
-.close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-/* IMAGE */
-.car-img {
-    width: 100%;
-    animation: slide 0.6s forwards;
-}
-
-@keyframes slide {
-    from { transform: translateX(-100px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* TEXTE */
-.fade {
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-}
-
-.fade:nth-child(2){animation-delay:0.2s;}
-.fade:nth-child(3){animation-delay:0.4s;}
-.fade:nth-child(4){animation-delay:0.6s;}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
-}
+/* COULEURS */
+.speed { background: #00aaff; }
+.control { background: #00ff99; }
+.style { background: #ff00cc; }
 
 /* CLOSE */
 .close {
@@ -177,6 +143,11 @@
     right: 30px;
     font-size: 30px;
     cursor: pointer;
+    color: white;
+}
+
+.close:hover {
+    color: #00aaff;
 }
 
 </style>
@@ -184,7 +155,6 @@
 
 <body>
 
-<!-- VIDEO -->
 <video autoplay muted loop class="video-bg">
     <source src="classement.mp4" type="video/mp4">
 </video>
@@ -216,10 +186,10 @@
 </div>
 
 <!-- PANEL -->
-<div id="panel" class="panel">
+<div id="panel" class="panel" onclick="closePanel()">
 <span class="close" onclick="closePanel()">✖</span>
 
-<div class="container">
+<div class="container" onclick="event.stopPropagation()">
 <div class="left">
 <img id="car" class="car-img">
 </div>
@@ -231,16 +201,30 @@
 <script>
 
 const pilots = {
-p1:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p2:{name:"Ulysse",nickname:"Saru",car:"Nissan Skyline GT-R32 - Elegy Retro Custom",wins:0,p2:1,p3:0,carImg:"Photo LN Ulysse 2.png"},
-p3:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p4:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p5:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p6:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p7:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p8:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p9:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"},
-p10:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png"}
+p1:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+
+p2:{
+name:"Ulysse",
+nickname:"Saru",
+car:"Nissan Skyline GT-R32",
+wins:0,
+p2:1,
+p3:0,
+carImg:"Photo LN Ulysse 2.png",
+
+speed:79,
+control:65,
+style:88
+},
+
+p3:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p4:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p5:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p6:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p7:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p8:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p9:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50},
+p10:{name:"?",nickname:"?",car:"?",wins:0,p2:0,p3:0,carImg:"car1.png",speed:50,control:50,style:50}
 };
 
 function openPanel(id){
@@ -249,10 +233,8 @@ let p = pilots[id];
 document.getElementById("car").src = p.carImg;
 
 document.getElementById("info").innerHTML = `
-<div>
 <div class="name">${p.name}</div>
 <div class="nickname">"${p.nickname}"</div>
-</div>
 
 <div class="box">
 <div class="box-title">VÉHICULE</div>
@@ -261,23 +243,23 @@ ${p.car}
 
 <div class="box">
 <div class="box-title">PALMARÈS</div>
-🥇 ${p.wins} Victoires<br>
-🥈 ${p.p2} Secondes<br>
-🥉 ${p.p3} Troisièmes
+🥇 ${p.wins}<br>
+🥈 ${p.p2}<br>
+🥉 ${p.p3}
 </div>
 
 <div class="box">
 <div class="box-title">PERFORMANCE</div>
 
-<div class="stat">Vitesse
+<div class="stat">Vitesse (${p.speed}%)
 <div class="bar"><div class="fill speed"></div></div>
 </div>
 
-<div class="stat">Contrôle
+<div class="stat">Contrôle (${p.control}%)
 <div class="bar"><div class="fill control"></div></div>
 </div>
 
-<div class="stat">Style
+<div class="stat">Style (${p.style}%)
 <div class="bar"><div class="fill style"></div></div>
 </div>
 
@@ -287,10 +269,14 @@ ${p.car}
 document.getElementById("panel").style.display = "block";
 
 setTimeout(()=>{
-document.querySelector(".speed").style.width = (p.wins*10+30)+"%";
-document.querySelector(".control").style.width = (p.p2*10+30)+"%";
-document.querySelector(".style").style.width = (p.p3*10+30)+"%";
+document.querySelector(".speed").style.width = p.speed + "%";
+document.querySelector(".control").style.width = p.control + "%";
+document.querySelector(".style").style.width = p.style + "%";
 },300);
+}
+
+function closePanel(){
+document.getElementById("panel").style.display = "none";
 }
 
 </script>
