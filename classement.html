@@ -69,13 +69,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible; /* 🔥 important */
 }
 
 /* IMAGE */
 .car-img {
-    width: 100%;
-    max-width: 750px;
-    filter: drop-shadow(0 0 50px #00aaff);
+    width: 110%;          /* 🔥 plus grande */
+    max-width: 1000px;    /* limite max */
+    transform: scale(1.2) translateX(-50px); /* zoom supplémentaire */
+    filter: drop-shadow(0 0 60px #00aaff);
 }
 
 /* RIGHT */
