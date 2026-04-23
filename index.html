@@ -31,37 +31,31 @@
     z-index: -1;
 }
 
-/* NAVBAR PRO */
+/* NAVBAR */
 .menu {
     position: fixed;
-    top: 10px; /* 🔥 AJOUT */
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-
-    width: 95%; /* un peu moins large */
-    
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 10px 30px;
-
-    border-radius: 10px; /* 🔥 effet flottant */
+    border-radius: 10px;
     border: 1px solid rgba(0,170,255,0.2);
     backdrop-filter: blur(10px);
     background: rgba(0,0,0,0.6);
 }
 
-/* LOGO À GAUCHE */
 .logo {
     position: absolute;
     left: 20px;
     top: 50%;
-    transform: translateY(-50%); /* 🔥 centre vertical */
+    transform: translateY(-50%);
     width: 65px;
 }
 
-/* LIENS CENTRÉS */
 .menu-links {
     display: flex;
     gap: 30px;
@@ -78,45 +72,37 @@
     text-shadow: 0 0 10px #00aaff;
 }
 
-/* HERO BAS DROITE */
+/* HERO */
 .hero {
     position: absolute;
     bottom: 60px;
     right: 60px;
-
     text-align: right;
-
     background: rgba(0,0,0,0.4);
     padding: 20px 30px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-
     opacity: 0;
     transform: translateY(50px);
     animation: heroAppear 1s forwards;
 }
 
-/* TITRE */
 .hero h1 {
     font-size: 50px;
     color: white;
     text-shadow: 0 0 20px #00aaff;
 }
 
-/* TEXTE */
 .hero p {
     color: #aaa;
-    margin: 10px 0;
 }
 
-/* BOUTON */
 .enter-btn {
     display: inline-block;
     border: 1px solid #00aaff;
     padding: 12px 30px;
     color: #00aaff;
     text-decoration: none;
-    transition: 0.3s;
 }
 
 .enter-btn:hover {
@@ -124,12 +110,52 @@
     color: black;
 }
 
-/* ANIMATION */
 @keyframes heroAppear {
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* 🔒 POPUP */
+#popup {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-box {
+    background: #111;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(0,170,255,0.3);
+}
+
+.popup-box input {
+    padding: 10px;
+    margin-top: 10px;
+    width: 200px;
+}
+
+.popup-box button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #00aaff;
+    border: none;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
 }
 
 </style>
@@ -142,7 +168,6 @@
     <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- OVERLAY -->
 <div class="overlay"></div>
 
 <!-- NAVBAR -->
@@ -151,21 +176,71 @@
 <img src="logo2.png" class="logo">
 
 <div class="menu-links">
-<a href="index.html">Accueil</a>
-<a href="classement.html">Classement</a>
-<a href="courses.html">Courses</a>
-<a href="club.html">Club</a>
+<a href="#" onclick="checkAccess('classement.html')">Classement</a>
+<a href="#" onclick="checkAccess('courses.html')">Courses</a>
+<a href="#" onclick="checkAccess('club.html')">Club</a>
 </div>
 
 </nav>
 
-<!-- TEXTE -->
+<!-- HERO -->
 <div class="hero">
     <h1>🏁 FMC 🏁</h1>
     <p>Bienvenue dans le Freeway Midnight Club</p>
 
-    <a href="classement.html" class="enter-btn">ENTRER</a>
+    <a href="#" onclick="checkAccess('classement.html')" class="enter-btn">ENTRER</a>
 </div>
+
+<!-- 🔒 POPUP -->
+<div id="popup">
+    <div class="popup-box" onclick="event.stopPropagation()">
+        <h2>🔒 Accès sécurisé</h2>
+        <p>Code requis</p>
+
+        <input type="password" id="pass">
+
+        <br>
+
+        <button onclick="validate()">ENTRER</button>
+
+        <div class="error" id="error"></div>
+    </div>
+</div>
+
+<script>
+
+let targetPage = "";
+
+/* CHECK ACCÈS */
+function checkAccess(page){
+
+if(localStorage.getItem("auth") === "ok"){
+    window.location.href = page;
+}else{
+    targetPage = page;
+    document.getElementById("popup").style.display = "flex";
+}
+
+}
+
+/* VALIDATION */
+function validate(){
+let pass = document.getElementById("pass").value;
+
+if(pass === "RsUsM12"){ // 🔥 CHANGE ICI
+    localStorage.setItem("auth","ok");
+    window.location.href = targetPage;
+}else{
+    document.getElementById("error").innerText = "Accès refusé";
+}
+}
+
+/* FERMER POPUP */
+document.getElementById("popup").onclick = function(){
+this.style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
