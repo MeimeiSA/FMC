@@ -85,9 +85,10 @@ body.panel-open {
     margin-bottom: 20px;
 }
 
-/* VIDEO */
-video {
+/* VIDEO YT */
+iframe {
     width: 80%;
+    height: 350px;
     border-radius: 10px;
 }
 
@@ -146,7 +147,9 @@ video {
 <div class="left">
 <div>
 <img id="track" class="track-img">
-<video id="video" controls></video>
+
+<iframe id="video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 </div>
 </div>
 
@@ -165,7 +168,7 @@ date:"?",
 difficulty:"⭐⭐⭐⭐⭐",
 length:"? km",
 img:"Lotus Circuit.png",
-video:"lotus.mp4"
+video:"" // pas encore de vidéo
 },
 
 c2:{
@@ -174,7 +177,9 @@ date:"?",
 difficulty:"⭐⭐⭐",
 length:"? km",
 img:"aonami route.png",
-video:"aonami.mp4"
+
+// 🔥 TA VIDÉO
+video:"https://www.youtube.com/embed/RqD3kEDCCz8?autoplay=1&mute=1"
 }
 
 };
@@ -184,8 +189,8 @@ let c = circuits[id];
 
 document.getElementById("track").src = c.img;
 
-let vid = document.getElementById("video");
-vid.src = c.video;
+/* VIDEO */
+document.getElementById("video").src = c.video;
 
 document.getElementById("info").innerHTML = `
 <h1>${c.name}</h1>
@@ -203,7 +208,7 @@ document.getElementById("panel").style.display = "none";
 document.body.classList.remove("panel-open");
 
 /* 🔥 STOP VIDEO */
-document.getElementById("video").pause();
+document.getElementById("video").src = "";
 }
 
 </script>
