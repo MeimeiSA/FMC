@@ -9,7 +9,7 @@
 
 <style>
 
-/* GRID COMPACTE */
+/* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -26,7 +26,6 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: 0.3s;
     display: flex;
     align-items: flex-end;
     padding: 10px;
@@ -34,7 +33,6 @@
     color: white;
 }
 
-/* overlay sombre */
 .card::after {
     content: "";
     position: absolute;
@@ -42,19 +40,17 @@
     background: rgba(0,0,0,0.4);
 }
 
-/* texte */
 .card span {
     position: relative;
     z-index: 2;
 }
 
-/* hover */
 .card:hover {
     transform: scale(1.08);
     box-shadow: 0 0 15px #ffcc00;
 }
 
-/* PANEL FIX */
+/* PANEL */
 .panel {
     position: fixed;
     top:0;
@@ -63,10 +59,9 @@
     height:100%;
     background: rgba(0,0,0,0.98);
     display: none;
-    z-index: 9999; /* 🔥 FIX BUG */
+    z-index: 9999;
 }
 
-/* BLOQUE SCROLL */
 body.panel-open {
     overflow: hidden;
 }
@@ -76,41 +71,33 @@ body.panel-open {
     height: 100%;
 }
 
-.left, .right {
+/* LEFT */
+.left {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.right {
-    flex-direction: column;
-    text-align: center;
-}
-
 /* IMAGE */
 .track-img {
     width: 80%;
-    animation: zoom 0.6s forwards;
+    margin-bottom: 20px;
 }
 
-@keyframes zoom {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+/* VIDEO */
+video {
+    width: 80%;
+    border-radius: 10px;
 }
 
-/* TEXTE */
-.fade {
-    opacity: 0;
-    animation: fadeIn 0.5s forwards;
-}
-
-.fade:nth-child(2){animation-delay:0.2s;}
-.fade:nth-child(3){animation-delay:0.4s;}
-.fade:nth-child(4){animation-delay:0.6s;}
-
-@keyframes fadeIn {
-    to { opacity: 1; }
+/* RIGHT */
+.right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 /* CLOSE */
@@ -135,7 +122,6 @@ body.panel-open {
 </nav>
 
 <div class="content">
-
 <h1>🏎️ Circuits</h1>
 
 <div class="grid">
@@ -148,24 +134,7 @@ body.panel-open {
 <span>Aonami Road</span>
 </div>
 
-<div class="card" style="background:url('interrogation.jpg') center/cover;" onclick="openCircuit('c3')">
-<span>Highway</span>
 </div>
-
-<div class="card" style="background:url('interrogation.jpg') center/cover;" onclick="openCircuit('c4')">
-<span>Vinewood</span>
-</div>
-
-<div class="card" style="background:url('interrogation.jpg') center/cover;" onclick="openCircuit('c5')">
-<span>Airport</span>
-</div>
-
-<div class="card" style="background:url('interrogation.jpg') center/cover;" onclick="openCircuit('c6')">
-<span>Desert</span>
-</div>
-
-</div>
-
 </div>
 
 <!-- PANEL -->
@@ -173,23 +142,41 @@ body.panel-open {
 <span class="close" onclick="closePanel()">✖</span>
 
 <div class="container">
+
 <div class="left">
+<div>
 <img id="track" class="track-img">
+<video id="video" controls></video>
 </div>
-<div class="right" id="info"></div>
 </div>
 
+<div class="right" id="info"></div>
+
+</div>
 </div>
 
 <script>
 
 const circuits = {
-c1:{name:"Lotus",date:"?",difficulty:"⭐⭐⭐⭐⭐",length:"? km",img:"Lotus Circuit.png"},
-c2:{name:"Aonami Road",date:"?",difficulty:"⭐⭐⭐",length:"? km",img:"aonami route.png"},
-c3:{name:"Highway Storm",date:"?",difficulty:"⭐⭐",length:"? km",img:"interrogation.jpg"},
-c4:{name:"Vinewood Night",date:"?",difficulty:"⭐⭐⭐⭐",length:"? km",img:"interrogation.jpg"},
-c5:{name:"Airport Speed",date:"?",difficulty:"⭐⭐⭐",length:"? km",img:"interrogation.jpg"},
-c6:{name:"Desert Run",date:"?",difficulty:"⭐⭐",length:"? km",img:"interrogation.jpg"}
+
+c1:{
+name:"Lotus",
+date:"?",
+difficulty:"⭐⭐⭐⭐⭐",
+length:"? km",
+img:"Lotus Circuit.png",
+video:"lotus.mp4"
+},
+
+c2:{
+name:"Aonami Road",
+date:"?",
+difficulty:"⭐⭐⭐",
+length:"? km",
+img:"aonami route.png",
+video:"aonami.mp4"
+}
+
 };
 
 function openCircuit(id){
@@ -197,20 +184,26 @@ let c = circuits[id];
 
 document.getElementById("track").src = c.img;
 
+let vid = document.getElementById("video");
+vid.src = c.video;
+
 document.getElementById("info").innerHTML = `
-<h1 class="fade">${c.name}</h1>
-<p class="fade"><b>Date :</b> ${c.date}</p>
-<p class="fade"><b>Longueur :</b> ${c.length}</p>
-<p class="fade"><b>Difficulté :</b> ${c.difficulty}</p>
+<h1>${c.name}</h1>
+<p><b>Date :</b> ${c.date}</p>
+<p><b>Longueur :</b> ${c.length}</p>
+<p><b>Difficulté :</b> ${c.difficulty}</p>
 `;
 
 document.getElementById("panel").style.display = "block";
-document.body.classList.add("panel-open"); // 🔥 bloque scroll
+document.body.classList.add("panel-open");
 }
 
 function closePanel(){
 document.getElementById("panel").style.display = "none";
 document.body.classList.remove("panel-open");
+
+/* 🔥 STOP VIDEO */
+document.getElementById("video").pause();
 }
 
 </script>
