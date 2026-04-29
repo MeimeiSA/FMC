@@ -34,7 +34,6 @@ body {
     display:flex;
     align-items:flex-end;
     padding:10px;
-    font-size:14px;
 }
 
 .card::after {
@@ -53,23 +52,28 @@ body {
     box-shadow:0 0 15px #00aaff;
 }
 
-/* PANEL */
+/* PANEL BACKGROUND */
 .panel {
     position:fixed;
     inset:0;
-    background:#000;
+    background:rgba(0,0,0,0.95);
     display:none;
     z-index:9999;
+    overflow-y:auto; /* 🔥 SCROLL */
 }
 
+/* CONTAINER CENTRÉ */
 .panel-content {
+    max-width:1100px;
+    margin:80px auto;
+    background:#0a0f18;
+    border-radius:15px;
+    padding:30px;
     display:flex;
-    height:100%;
-    padding:40px;
-    gap:40px;
+    gap:30px;
 }
 
-/* LEFT SIDE */
+/* LEFT */
 .left {
     flex:1;
     display:flex;
@@ -77,17 +81,11 @@ body {
     gap:20px;
 }
 
-/* BOX STYLE */
-.box {
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(0,170,255,0.2);
-    border-radius:12px;
-    padding:15px;
-}
-
 /* IMAGE */
 .track-img {
     width:100%;
+    max-height:250px; /* 🔥 LIMITÉ */
+    object-fit:contain;
     border-radius:10px;
 }
 
@@ -98,28 +96,30 @@ iframe {
     border-radius:10px;
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 .right {
-    width:350px;
+    width:300px;
     display:flex;
     flex-direction:column;
     gap:20px;
 }
 
-/* TITLE */
-.title {
-    font-size:32px;
+/* BOX */
+.box {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,170,255,0.2);
+    border-radius:10px;
+    padding:15px;
 }
 
-/* INFO */
-.info {
-    line-height:1.8;
-    color:#ccc;
+/* TITLE */
+.title {
+    font-size:28px;
 }
 
 /* CLOSE */
 .close {
-    position:absolute;
+    position:fixed;
     top:20px;
     right:30px;
     font-size:30px;
@@ -154,13 +154,9 @@ iframe {
 
 <div class="left">
 
-<div class="box">
 <img id="track" class="track-img">
-</div>
 
-<div class="box">
 <iframe id="video" src="" frameborder="0" allowfullscreen></iframe>
-</div>
 
 </div>
 
@@ -170,7 +166,7 @@ iframe {
 <div class="title" id="title"></div>
 </div>
 
-<div class="box info" id="info"></div>
+<div class="box" id="info"></div>
 
 </div>
 
